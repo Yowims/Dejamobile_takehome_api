@@ -25,7 +25,8 @@ app.get("/api", function(req,res){
 });
 
 require("./routes/cardRoutes")(app,jwt);
-require("./routes/userRoutes")(app)
+require("./routes/userRoutes")(app);
+require("./routes/payRoutes")(app);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Example app listening on port 3000!')
