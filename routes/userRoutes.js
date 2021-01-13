@@ -19,7 +19,7 @@ module.exports = function(app){
     });
 
     app.post("/api/users", function(req,res){
-        if(req.body.email == null || req.body.password == null) res.status(400).send("L'un des paramètres obligatoires n'a pas été fourni.");
+        if(req.body.email == null || req.body.name == null || req.body.password == null) res.status(400).send("L'un des paramètres obligatoires n'a pas été fourni.");
         else {
             User.findOne({email: req.body.email}, function(err,user){
                 if(err) res.send(err);
@@ -31,6 +31,7 @@ module.exports = function(app){
                         bcrypt.hash(req.body.password, salt, function(err, hash){
                             if(err) res.send(err);
                             newUser.email = req.body.email;
+                            newUser.name = req.body.name;
                             newUser.password = hash;
     
                             newUser.save(function(err){
